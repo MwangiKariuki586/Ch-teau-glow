@@ -1,0 +1,56 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.codex
+.kiro
+.gemini
+**/*.sql
+**/*.log
+!supabase/migrations/20260417130000_add_order_inventory_deduction_foundation.sql
+!supabase/migrations/20260417143000_prototype_reserve_inventory_on_order_creation.sql
+!supabase/migrations/20260417160000_inventory_asset_creation_entrypoint.sql
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+/BROWZ-Marketplace-main
+specs.txt
+.kiro
+
+# IDE / AI tooling config (may contain secrets like PATs)
+.gemini/
+.codex/

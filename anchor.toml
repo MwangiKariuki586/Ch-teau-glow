@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'development'
+
+[org]
+apid = 'emkay-d74ea6'
+
+[service]
+apid = 'browz'
+category = 'javascript'
+cert-style = 'acme'

@@ -1,0 +1,1 @@
+export { FavoritesProvider, useFavoritesContext } from './favorites-context';

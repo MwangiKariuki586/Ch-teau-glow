@@ -1,0 +1,12 @@
+export { HeroSection } from './hero-section';
+export { FounderSection } from './founder-section';
+export { VideoShowcaseSection } from './video-showcase-section';
+export { MissionExpertiseSection } from './mission-expertise-section';
+export { PressSection } from './press-section';
+export { StatsSection } from './stats-section';
+export { ServicesSection } from './services-section';
+export { DepartmentsSection } from './departments-section';
+export { DoctorsSection } from './doctors-section';
+export { ValuesSection } from './values-section';
+export { PhilosophySection } from './philosophy-section';
+export { CTASection } from './cta-section';
