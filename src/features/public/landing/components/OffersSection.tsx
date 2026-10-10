@@ -18,12 +18,6 @@ export function OffersSection() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
-            <div className="bg-white/10 px-6 py-3 rounded-xl border border-white/20 text-center w-full sm:w-auto">
-              <span className="block text-xs text-white/60 mb-1">Use Code</span>
-              <span className="font-mono font-semibold text-[#c9a961] tracking-widest text-lg">
-                {mainOffer.code}
-              </span>
-            </div>
             <Link
               href="/offers"
               className="bg-[#c9a961] text-[#2C1A0E] px-8 py-4 rounded-xl font-semibold hover:bg-[#b8963f] transition-colors text-center w-full sm:w-auto whitespace-nowrap shadow-lg"
