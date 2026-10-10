@@ -4,6 +4,10 @@ import { CustomerHeader } from "@/features/customer/shared/components/customer-h
 import { FavoritesProvider } from "@/features/customer/favorites/context/favorites-context";
 import { AuthProvider } from "@/lib/auth/context";
 
+// Auth-gated shell queries Supabase during render — render on-demand so
+// `next build` never executes Supabase code without env vars.
+export const dynamic = "force-dynamic";
+
 export default function CustomerLayout({
   children,
 }: {

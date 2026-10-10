@@ -6,6 +6,10 @@ import { createClient } from "@/lib/supabase/server";
 import { getWaitlistOfferGroupForUser } from "@/lib/waitlist/server";
 import { AuthProvider } from "@/lib/auth/context";
 
+// Queries Supabase + redirects per-user — must render on-demand, and this
+// keeps `next build` from executing Supabase code without env vars.
+export const dynamic = "force-dynamic";
+
 type SearchParams = Promise<{
   failed_slot?: string;
 }>;
