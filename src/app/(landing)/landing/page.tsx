@@ -1,5 +1,9 @@
 import { LandingPage } from "@/features/public/landing";
 
+// Fetches live Supabase data at request time — skip static prerender
+// so `next build` doesn't require Supabase env vars.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Landing | Château Glow",
   description:

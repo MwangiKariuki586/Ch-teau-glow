@@ -18,23 +18,30 @@ type ServiceRow = {
 };
 
 export async function FeaturedTreatments() {
-  const supabase = await createClient();
+  let rows: ServiceRow[] = [];
+  try {
+    const supabase = await createClient();
 
-  const { data } = await supabase
-    .from("services")
-    .select(
-      `id, name, slug, description,
+    const { data } = await supabase
+      .from("services")
+      .select(
+        `id, name, slug, description,
        min_price_cents, currency, duration_minutes,
        cover_image_url, is_featured,
        category:service_categories!inner(name)`,
-    )
-    .eq("status", "published")
-    .neq("service_categories.name", "Consultations")
-    .order("is_featured", { ascending: false })
-    .order("created_at", { ascending: false })
-    .limit(3);
+      )
+      .eq("status", "published")
+      .neq("service_categories.name", "Consultations")
+      .order("is_featured", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(3);
 
-  const rows = (data ?? []) as ServiceRow[];
+    rows = (data ?? []) as ServiceRow[];
+  } catch {
+    // Build-time prerender without Supabase env, or DB unreachable:
+    // render nothing instead of failing the whole page build.
+    return null;
+  }
   if (!rows.length) return null;
 
   const services = rows.map((s) => {

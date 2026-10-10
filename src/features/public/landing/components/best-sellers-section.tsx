@@ -19,20 +19,28 @@ type ProductRow = {
 };
 
 export async function BestSellersSection() {
-  const supabase = await createClient();
+  let dbProducts: ProductRow[] = [];
+  try {
+    const supabase = await createClient();
 
-  const { data: dbProducts } = await supabase
-    .from("products")
-    .select(
-      `
+    const { data } = await supabase
+      .from("products")
+      .select(
+        `
       id, name, slug, price_display, unit_price, price_value, currency, rating, images, description, is_featured,
       product_categories!inner(name, slug)
     `,
-    )
-    .eq("is_active", true)
-    .order("is_featured", { ascending: false })
-    .order("created_at", { ascending: false })
-    .limit(4);
+      )
+      .eq("is_active", true)
+      .order("is_featured", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(4);
+    dbProducts = (data ?? []) as ProductRow[];
+  } catch {
+    // Build-time prerender without Supabase env, or DB unreachable:
+    // render nothing instead of failing the whole page build.
+    return null;
+  }
 
   const products = ((dbProducts ?? []) as ProductRow[]).map((p) => ({
     id: p.id,

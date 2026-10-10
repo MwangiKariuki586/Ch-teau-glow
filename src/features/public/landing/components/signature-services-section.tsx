@@ -19,23 +19,31 @@ type ServiceRow = {
 };
 
 export async function SignatureServicesSection() {
-  const supabase = await createClient();
+  let data: ServiceRow[] | null = null;
+  try {
+    const supabase = await createClient();
 
-  // Single query: featured first, then any published — no waterfall fallback
-  const { data } = await supabase
-    .from("services")
-    .select(
-      `
+    // Single query: featured first, then any published — no waterfall fallback
+    const result = await supabase
+      .from("services")
+      .select(
+        `
       id, name, slug, description,
       min_price_cents, max_price_cents, currency,
       duration_minutes, cover_image_url, is_featured,
       category:service_categories(name)
     `,
-    )
-    .eq("status", "published")
-    .order("is_featured", { ascending: false })
-    .order("created_at", { ascending: false })
-    .limit(4);
+      )
+      .eq("status", "published")
+      .order("is_featured", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(4);
+    data = (result.data ?? []) as ServiceRow[];
+  } catch {
+    // Build-time prerender without Supabase env, or DB unreachable:
+    // render nothing instead of failing the whole page build.
+    return null;
+  }
 
   const rows = (data ?? []) as ServiceRow[];
   if (!rows.length) return null;
